@@ -3,7 +3,7 @@
  * Drives the app's own /api/world route (locally under `next dev` with DEV_AUTH_BYPASS, or the live
  * site with the shared secret), several people at a time. Already-built people return at once.
  *
- * Usage:  node scripts/build-world.ts [--tier close|all] [--limit N] [--parallel 4] [--base http://localhost:4110]
+ * Usage:  node scripts/build-world.ts [--tier close|all] [--limit N] [--parallel 4] [--base http://localhost:4130]
  *   close (default): direct ancestors, anyone with a picture, anyone within 3 family links of the root
  *   all:             everyone born 1700 or later
  */
@@ -11,7 +11,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
 const arg = (name: string, dflt: string) => { const i = process.argv.indexOf(name); return i > -1 ? process.argv[i + 1] : dflt; };
-const tier = arg("--tier", "close"), limit = Number(arg("--limit", "0")) || Infinity, parallel = Number(arg("--parallel", "4")), base = arg("--base", "http://localhost:4110");
+const tier = arg("--tier", "close"), limit = Number(arg("--limit", "0")) || Infinity, parallel = Number(arg("--parallel", "4")), base = arg("--base", "http://localhost:4130");
 const secret = process.env.DIGEST_SECRET;
 
 const DATA = join(import.meta.dirname, "..", "data");

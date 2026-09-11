@@ -29,7 +29,8 @@ It has faults on purpose, so every screen has something to do:
 - two typos that do not add up: a mother aged six at her daughter's birth, and a life
   of 113 years;
 - two probable duplicate records, for the compare-and-merge screen;
-- ten people with no death and a recent birth, for the living-person privacy rule.
+- nine people withheld by the living-person privacy rule (the import summary says ten: its
+  simpler `living` flag does not look at children's births, `src/lib/privacy.ts` does).
 
 `geocode.json` holds coordinates for every place in the file, so the map works without
 a geocoding run. It is copied into `data/` alongside the import.

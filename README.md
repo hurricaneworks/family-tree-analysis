@@ -33,7 +33,8 @@ npm run dev
 ```
 
 Open http://localhost:4130. With nothing configured you get the invented sample family, so
-every screen has something to show. Node 22 or later is required.
+every screen has something to show. Node 22.18 or later is required (we run 26);
+the scripts use Node's own TypeScript support, which older 22.x releases only had behind a flag.
 
 To use your own tree, put your export in `GEDCOM/` and run:
 
@@ -43,7 +44,9 @@ npm run import -- "GEDCOM/your-export.ged"
 
 Then restart the dev server. Places on the map need coordinates: `node scripts/geocode.ts`
 looks each one up on OpenStreetMap, one a second, and can be stopped and resumed. Set
-`USER_AGENT_CONTACT` to an email address first, as Nominatim asks.
+`USER_AGENT_CONTACT` to an email address first, as Nominatim asks. `data/geocode.json` is a
+cache keyed on the place string, so the sample's coordinates stay in it after you import and
+are reused wherever your tree spells a place the same way; the geocoder only fetches the rest.
 
 Nothing in `GEDCOM/` or `data/` is ever committed. The `.gitignore` sees to it.
 
@@ -111,7 +114,10 @@ uploads the images to a private Supabase Storage bucket.
 - **Journey**, **fan**, **the sixteen**, **lives**, **descendants**, **album**, **map**: the
   visual views. Descendants colours each branch by the country it ended up in. Lives draws
   each life as a bar against the census nights and the wars.
-- **Changes**: what differs between one export and the next.
+- **Pictures** and **Who is this?**: the whole gallery, and the pictures nobody has named yet,
+  with notes kept between visits once sign-in is on.
+- **Changes**: what differs between one export and the next. **Log**: every merge and
+  not-a-duplicate decision, with undo. **Start here**: the whole site explained on one page, for a first visit.
 
 ![Lives, side by side](screenshots/lives.png)
 
@@ -130,6 +136,64 @@ If the site is for your family only, behind sign-in, set `SHOW_LIVING_PEOPLE=tru
 once, when the tree is loaded, so every page, the printable life, the weekly digest and the
 chat see the same withheld records.
 
+## Turning on sign-in
+
+Everything that remembers something (comments, My list, merge decisions, picture notes, the
+weekly digest) needs a database, and the database brings sign-in with it. Steps:
+
+1. Create a free project at [supabase.com](https://supabase.com). In Authentication, Sign In /
+   Providers, turn **Allow new users to sign up** off: the only accounts are the ones you create.
+2. Apply the schema. With the [Supabase CLI](https://supabase.com/docs/guides/cli) installed:
+
+   ```bash
+   supabase link --project-ref <your project ref>
+   supabase db push
+   ```
+
+   That runs everything in `supabase/migrations/` in order. One of them schedules the weekly
+   digest; before pushing, edit `20260909174613_digest_runs_and_weekly_cron.sql` and replace
+   `https://example.invalid/api/digest` with your own site's address. Skip the edit if you do
+   not want the digest: with no `digest_secret` in Vault the job posts nothing.
+3. Put the project's URL, anon key and secret key in `.env.local` as `NEXT_PUBLIC_SUPABASE_URL`,
+   `NEXT_PUBLIC_SUPABASE_ANON_KEY` and `SUPABASE_SECRET_KEY`, and list who may sign in, comma
+   separated, in `ALLOWED_EMAILS`. An address not on that list is refused even with a valid password.
+4. Create each login from your own machine (the script uses the secret key):
+
+   ```bash
+   USER_PASSWORD='choose one' node --env-file=.env.local scripts/create-user.ts you@example.com
+   ```
+
+   Run it again with a new password to reset one.
+5. For the digest, also set `RESEND_API_KEY`, `MAIL_FROM`, `DIGEST_TO` and a long random
+   `DIGEST_SECRET`, and store the same value in the Supabase dashboard under Project Settings,
+   Vault, as a secret named `digest_secret`. The database calls `/api/digest` every Monday at
+   07:00 UTC with that secret; the route refuses anything without it.
+
+Under `npm run dev` only, `DEV_AUTH_BYPASS=true` skips the login page and signs you in as the
+first address in `ALLOWED_EMAILS`. It does nothing on a production build.
+
+## Putting it on the internet
+
+The repo carries a `netlify.toml`, and any host that builds a Next.js app from git will do. Two
+things are not obvious:
+
+- **Configure sign-in first.** Without the database the site has no login at all, so a deployed
+  copy would show your family to anyone with the address. Living people's details are withheld by
+  default, but the dead are not, and the pictures are not.
+- **Your tree is not in the repo, so the build has to fetch it.** `data/` and `GEDCOM/` are
+  ignored by git (on purpose; see above), which means a hosted build starts empty and would
+  otherwise import the sample family. Put your export somewhere private that the build can read
+  with a URL only you know (a private Supabase Storage bucket with a long-lived signed URL, say),
+  and set `TREE_GEDCOM_URL` to it in the host's environment. `scripts/ensure-data.ts` downloads and
+  imports it before every build. Set `TREE_GEOCODE_URL` the same way, pointing at the
+  `data/geocode.json` your local geocoding run produced, or the map has no pins. Both URLs are
+  secrets: they lead to your family's records. Re-deploy after each new export.
+
+The rest is environment: everything in `.env.example` goes into the host's settings, with
+`SITE_URL` set to the real address so emailed links work. `next.config.ts` already tells the
+build to ship `data/` with the server function; without that every page fails in production
+while working locally.
+
 ## Optional features and what they cost
 
 The tree, the gap report and every visual view work with nothing configured. Each feature
@@ -140,7 +204,7 @@ home page with a line saying what it would do. `.env.example` documents every se
 |---|---|---|
 | Sign-in, comments, My list, merge decisions | A free [Supabase](https://supabase.com) project; three keys | Nothing at this scale |
 | Ask the tree: a question in plain words, answered from the records | `ANTHROPIC_API_KEY` | Roughly 5p to 30p a question, more for a long chain of lookups |
-| Their world: a background note on the year and place someone was born | `ANTHROPIC_API_KEY` | About a penny a person, once, then cached |
+| Their world: a background note on the year and place someone was born | `ANTHROPIC_API_KEY` and the database | About a penny a person, once, then cached. `scripts/build-world.ts` writes them ahead of time so nobody waits |
 | Replies to comments | `ANTHROPIC_API_KEY` and the database | Roughly 5p to 10p a comment |
 | What the papers say: certificates and headstones read and checked against the tree | `ANTHROPIC_API_KEY`, the images, one run of `scripts/read-documents.ts` | Roughly 5p to 10p a document, once |
 | Email: comment replies and the weekly digest | `RESEND_API_KEY` | Free tier covers a family |

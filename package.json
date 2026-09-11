@@ -12,7 +12,7 @@
     "import": "node scripts/import.ts"
   },
   "engines": {
-    "node": ">=22.0.0"
+    "node": ">=22.18.0"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "0.124.0",

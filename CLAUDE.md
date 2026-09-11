@@ -41,7 +41,7 @@ gitignored for exactly this) and run it before every push.
 
 ## Commands
 ```bash
-npm ci           # install, always from the lockfile
+npm ci           # install, always from the lockfile (Node 22.18+: the scripts rely on unflagged type stripping)
 npm run dev      # http://localhost:4130; imports samples/ automatically when data/ is empty
 npm run build    # production build (also imports the sample if data/ is empty)
 npx tsc --noEmit # type check, faster than a build
@@ -66,7 +66,8 @@ every variable.
 | `NEXT_PUBLIC_OWNER_NAME` | "the keeper" (whoever runs the site, in copy and emails) |
 | `SITE_URL` | `http://localhost:4130` |
 | `OWNER_EMAIL`, `MAIL_FROM` | unset means no email is sent |
-| `CONTACT_EMAIL` | used in the User-Agent for Nominatim and Wikipedia |
+| `CONTACT_EMAIL` | used in the app's User-Agent for Wikipedia (the geocode script reads `USER_AGENT_CONTACT` instead) |
+| `TREE_GEDCOM_URL`, `TREE_GEOCODE_URL` | unset: a hosted build imports the sample. Set to private URLs, `ensure-data.ts` fetches your tree before the build (README, "Putting it on the internet") |
 | `SHOW_LIVING_PEOPLE` | unset: living people withheld (see above) |
 
 Which optional features are on is decided in `src/lib/features.tsx`: `DATABASE` (three Supabase
@@ -81,14 +82,20 @@ that, never the raw constant.
 ## Structure
 - `scripts/import.ts` a zero-dependency GEDCOM 5.5.1 parser on Node's native TypeScript. Writes
   `data/*.json`. Probably the most reusable thing here. `scripts/ensure-data.ts` (predev/prebuild)
-  imports the sample and copies `samples/geocode.json` when `data/` is empty.
+  runs only when `data/people.json` is absent: fetches and imports `TREE_GEDCOM_URL` if set (hosted
+  builds), else imports the sample and copies `samples/geocode.json`.
+- `scripts/create-user.ts` makes an allowlisted login (needs the secret key, run locally);
+  `scripts/build-world.ts` pre-builds Their world against a running site; `scripts/verify-tasks.ts`
+  re-tests done tasks after a fresh import. Setup steps for sign-in and the digest cron are in the
+  README ("Turning on sign-in").
 - `src/lib/` the substance: `types.ts` (what the importer writes), `data.ts` (loads and indexes the
   tree once per process: parents, generations from the root, link steps), `privacy.ts`,
   `features.tsx`, `gaps.ts` (the research-gap rules), `ancestry.ts` (ahnentafel numbering shared by
   every visual view), `tools.ts` (the lookup tools the chat model calls), `world.ts`, `digest.ts`,
   `timeline.ts` (a life as readable entries, for the print page).
-- `src/app/` the pages. Working: desk (`/`), list, gaps, people, person (+ print), compare, papers,
-  ask, messages, log, changes. Visual: journey, fan, sixteen, lives, descendants, album, map.
+- `src/app/` the pages. Working: desk (`/`), start, list, gaps, people, person (+ print), compare,
+  papers, ask, messages, log, changes, photos, name-them, picture. Visual: journey, fan, sixteen,
+  lives, descendants, album, map.
 - `src/components/SideNav.tsx` the left menu in three groups; `HelpDrawer` with text in `src/lib/help.ts`.
 - `samples/` the invented family and its coordinates. `screenshots/` the README images.
 - `supabase/migrations/` the optional schema: auth, tree edits, messages, tasks, notes.

@@ -1,6 +1,6 @@
 /**
  * Geocode every place string in data/places.json via OpenStreetMap Nominatim, one request a second,
- * into data/geocode.json (committed). Resumable: places already in the cache are skipped, so a
+ * into data/geocode.json (not committed: it is derived from your own tree). Resumable: places already in the cache are skipped, so a
  * re-import only costs the new place strings.
  *
  * Usage:  node scripts/geocode.ts            # all uncached places, most-used first
