@@ -1,0 +1,28 @@
+*CLAUDEinthisfolder*
+/scratch
+node_modules/
+.env.local
+.env
+/docs
+.claude/
+.DS_Store
+.next/
+.netlify/
+tsconfig.tsbuildinfo
+
+# Records must never enter this repo. See CLAUDE.md: a file added and
+# deleted is still in history, and this repo is destined to be public.
+# The folders themselves are tracked (via their README) so a cloner sees
+# the structure; everything they hold is ignored.
+/GEDCOM/*
+!/GEDCOM/README.md
+/data/*
+!/data/README.md
+
+# Any stray export anywhere, except the fictional sample that ships with the app.
+*.ged
+!/samples/*.ged
+
+# Working notes for the maintainer, kept locally
+/PROJECT_PLAN.md
+/PROJECT_PLAN_ARCHIVE.md

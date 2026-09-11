@@ -1,0 +1,219 @@
+{
+ "Whitby, Yorkshire, England": {
+  "lat": 54.4863,
+  "lon": -0.6133,
+  "displayName": "Whitby, Yorkshire, England",
+  "matched": "Whitby, Yorkshire, England",
+  "dropped": 0
+ },
+ "Robin Hood's Bay, Yorkshire, England": {
+  "lat": 54.4345,
+  "lon": -0.534,
+  "displayName": "Robin Hood's Bay, Yorkshire, England",
+  "matched": "Robin Hood's Bay, Yorkshire, England",
+  "dropped": 0
+ },
+ "Fylingdales, Yorkshire, England": {
+  "lat": 54.41,
+  "lon": -0.55,
+  "displayName": "Fylingdales, Yorkshire, England",
+  "matched": "Fylingdales, Yorkshire, England",
+  "dropped": 0
+ },
+ "Staithes, Yorkshire, England": {
+  "lat": 54.5583,
+  "lon": -0.79,
+  "displayName": "Staithes, Yorkshire, England",
+  "matched": "Staithes, Yorkshire, England",
+  "dropped": 0
+ },
+ "Hinderwell, Yorkshire, England": {
+  "lat": 54.54,
+  "lon": -0.775,
+  "displayName": "Hinderwell, Yorkshire, England",
+  "matched": "Hinderwell, Yorkshire, England",
+  "dropped": 0
+ },
+ "Pickering, Yorkshire, England": {
+  "lat": 54.246,
+  "lon": -0.778,
+  "displayName": "Pickering, Yorkshire, England",
+  "matched": "Pickering, Yorkshire, England",
+  "dropped": 0
+ },
+ "Malton, Yorkshire, England": {
+  "lat": 54.1355,
+  "lon": -0.798,
+  "displayName": "Malton, Yorkshire, England",
+  "matched": "Malton, Yorkshire, England",
+  "dropped": 0
+ },
+ "Scarborough, Yorkshire, England": {
+  "lat": 54.283,
+  "lon": -0.4,
+  "displayName": "Scarborough, Yorkshire, England",
+  "matched": "Scarborough, Yorkshire, England",
+  "dropped": 0
+ },
+ "Middlesbrough, Yorkshire, England": {
+  "lat": 54.5742,
+  "lon": -1.235,
+  "displayName": "Middlesbrough, Yorkshire, England",
+  "matched": "Middlesbrough, Yorkshire, England",
+  "dropped": 0
+ },
+ "Hull, Yorkshire, England": {
+  "lat": 53.7676,
+  "lon": -0.3274,
+  "displayName": "Hull, Yorkshire, England",
+  "matched": "Hull, Yorkshire, England",
+  "dropped": 0
+ },
+ "York, Yorkshire, England": {
+  "lat": 53.959,
+  "lon": -1.0815,
+  "displayName": "York, Yorkshire, England",
+  "matched": "York, Yorkshire, England",
+  "dropped": 0
+ },
+ "Liverpool, Lancashire, England": {
+  "lat": 53.4084,
+  "lon": -2.9916,
+  "displayName": "Liverpool, Lancashire, England",
+  "matched": "Liverpool, Lancashire, England",
+  "dropped": 0
+ },
+ "London, England": {
+  "lat": 51.5074,
+  "lon": -0.1278,
+  "displayName": "London, England",
+  "matched": "London, England",
+  "dropped": 0
+ },
+ "Lowestoft, Suffolk, England": {
+  "lat": 52.4797,
+  "lon": 1.7508,
+  "displayName": "Lowestoft, Suffolk, England",
+  "matched": "Lowestoft, Suffolk, England",
+  "dropped": 0
+ },
+ "Merthyr Tydfil, Glamorgan, Wales": {
+  "lat": 51.7486,
+  "lon": -3.3793,
+  "displayName": "Merthyr Tydfil, Glamorgan, Wales",
+  "matched": "Merthyr Tydfil, Glamorgan, Wales",
+  "dropped": 0
+ },
+ "Aberdare, Glamorgan, Wales": {
+  "lat": 51.713,
+  "lon": -3.443,
+  "displayName": "Aberdare, Glamorgan, Wales",
+  "matched": "Aberdare, Glamorgan, Wales",
+  "dropped": 0
+ },
+ "Cardiff, Glamorgan, Wales": {
+  "lat": 51.4816,
+  "lon": -3.1791,
+  "displayName": "Cardiff, Glamorgan, Wales",
+  "matched": "Cardiff, Glamorgan, Wales",
+  "dropped": 0
+ },
+ "Llanidloes, Montgomeryshire, Wales": {
+  "lat": 52.449,
+  "lon": -3.539,
+  "displayName": "Llanidloes, Montgomeryshire, Wales",
+  "matched": "Llanidloes, Montgomeryshire, Wales",
+  "dropped": 0
+ },
+ "Westport, County Mayo, Ireland": {
+  "lat": 53.801,
+  "lon": -9.52,
+  "displayName": "Westport, County Mayo, Ireland",
+  "matched": "Westport, County Mayo, Ireland",
+  "dropped": 0
+ },
+ "Castlebar, County Mayo, Ireland": {
+  "lat": 53.854,
+  "lon": -9.298,
+  "displayName": "Castlebar, County Mayo, Ireland",
+  "matched": "Castlebar, County Mayo, Ireland",
+  "dropped": 0
+ },
+ "County Mayo, Ireland": {
+  "lat": 53.85,
+  "lon": -9.3,
+  "displayName": "County Mayo, Ireland",
+  "matched": "County Mayo, Ireland",
+  "dropped": 1
+ },
+ "Ypres, West Flanders, Belgium": {
+  "lat": 50.851,
+  "lon": 2.8857,
+  "displayName": "Ypres, West Flanders, Belgium",
+  "matched": "Ypres, West Flanders, Belgium",
+  "dropped": 0
+ },
+ "Gallipoli, Turkey": {
+  "lat": 40.245,
+  "lon": 26.28,
+  "displayName": "Gallipoli, Turkey",
+  "matched": "Gallipoli, Turkey",
+  "dropped": 0
+ },
+ "Melbourne, Victoria, Australia": {
+  "lat": -37.8136,
+  "lon": 144.9631,
+  "displayName": "Melbourne, Victoria, Australia",
+  "matched": "Melbourne, Victoria, Australia",
+  "dropped": 0
+ },
+ "Ballarat, Victoria, Australia": {
+  "lat": -37.5622,
+  "lon": 143.8503,
+  "displayName": "Ballarat, Victoria, Australia",
+  "matched": "Ballarat, Victoria, Australia",
+  "dropped": 0
+ },
+ "Geelong, Victoria, Australia": {
+  "lat": -38.1499,
+  "lon": 144.3617,
+  "displayName": "Geelong, Victoria, Australia",
+  "matched": "Geelong, Victoria, Australia",
+  "dropped": 0
+ },
+ "Quebec, Canada": {
+  "lat": 46.8139,
+  "lon": -71.208,
+  "displayName": "Quebec, Canada",
+  "matched": "Quebec, Canada",
+  "dropped": 0
+ },
+ "Hamilton, Ontario, Canada": {
+  "lat": 43.2557,
+  "lon": -79.8711,
+  "displayName": "Hamilton, Ontario, Canada",
+  "matched": "Hamilton, Ontario, Canada",
+  "dropped": 0
+ },
+ "Toronto, Ontario, Canada": {
+  "lat": 43.6532,
+  "lon": -79.3832,
+  "displayName": "Toronto, Ontario, Canada",
+  "matched": "Toronto, Ontario, Canada",
+  "dropped": 0
+ },
+ "Scranton, Pennsylvania, USA": {
+  "lat": 41.409,
+  "lon": -75.6624,
+  "displayName": "Scranton, Pennsylvania, USA",
+  "matched": "Scranton, Pennsylvania, USA",
+  "dropped": 0
+ },
+ "New York, New York, USA": {
+  "lat": 40.7128,
+  "lon": -74.006,
+  "displayName": "New York, New York, USA",
+  "matched": "New York, New York, USA",
+  "dropped": 0
+ }
+}
