@@ -12,7 +12,8 @@ the app is for; this file says how it is put together and what will bite you.
   small controls, no cards, plain British English, nothing that needs a second click to discover.
   Keep that; it is the reason this exists when a dozen GEDCOM viewers already do.
 - Locale/voice: British English. No em dashes or en dashes in copy.
-- Licence MIT. Name `family-tree-analysis`.
+- Licence MIT. Name `family-tree-analysis`. Public at https://github.com/hurricaneworks/family-tree-analysis
+  (Dependabot alerts on). No hosted deployment: pushing to GitHub deploys nothing, no Netlify site is linked.
 
 ## The privacy rule that governs this whole project
 
