@@ -135,3 +135,9 @@ that, never the raw constant.
   ship code that logs into one.
 - The AI features each need a third-party key and cost real money per use. They are optional and
   the app is fully usable with none of them; the README table gives the figures.
+
+## ⚠️ node_modules cleared 19 Oct 2026 — run `npm ci` before anything
+`node_modules` was deleted from this project on 19 Oct 2026 to reclaim local disk space.
+`package-lock.json` is intact, so `npm ci` restores the exact tree. Run it before any build,
+dev server or test run. Use `npm ci`, never `npm install`, so the lockfile is respected exactly.
+Delete this section once you have run it.
